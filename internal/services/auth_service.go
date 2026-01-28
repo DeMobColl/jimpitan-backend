@@ -82,8 +82,8 @@ func (s *AuthService) Login(username, password string) (*models.LoginResponse, e
 		Role:        user.Role,
 		Username:    user.Username,
 		Token:       tokenString,
-		TokenExpiry: tokenExpiry,
-		LastLogin:   now,
+		TokenExpiry: &tokenExpiry,
+		LastLogin:   &now,
 	}, nil
 }
 
@@ -113,7 +113,7 @@ func (s *AuthService) VerifyToken(token string) (*models.User, error) {
 		return nil, fmt.Errorf("token sudah kadaluarsa")
 	}
 
-	user.TokenExpiry = tokenExpiry
+	user.TokenExpiry = &tokenExpiry
 	return &user, nil
 }
 

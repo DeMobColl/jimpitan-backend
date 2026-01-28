@@ -76,8 +76,10 @@ func main() {
 	transactionRoutes := router.PathPrefix("/api/transactions").Subrouter()
 	transactionRoutes.Use(middleware.AuthMiddleware(&cfg.JWT))
 	transactionRoutes.HandleFunc("", transactionHandler.GetHistory).Methods(http.MethodGet)
+	transactionRoutes.HandleFunc("/my-history", transactionHandler.GetMyHistory).Methods(http.MethodGet)
 	transactionRoutes.HandleFunc("", transactionHandler.SubmitTransaction).Methods(http.MethodPost)
 	transactionRoutes.HandleFunc("", transactionHandler.DeleteTransaction).Methods(http.MethodDelete)
+	transactionRoutes.HandleFunc("/bulk-delete", transactionHandler.BulkDeleteTransactions).Methods(http.MethodPost)
 
 	// Setup CORS
 	c := cors.New(cors.Options{

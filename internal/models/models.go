@@ -4,16 +4,16 @@ import "time"
 
 // User represents a system user (admin or petugas)
 type User struct {
-	ID           string    `json:"id"`           // USR-001
-	Name         string    `json:"name"`
-	Role         string    `json:"role"`         // admin or petugas
-	Username     string    `json:"username"`
-	PasswordHash string    `json:"-"`            // Never expose password hash
-	Token        string    `json:"token,omitempty"`
-	TokenExpiry  time.Time `json:"token_expiry,omitempty"`
-	LastLogin    time.Time `json:"last_login,omitempty"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	ID           string     `json:"id"`           // USR-001
+	Name         string     `json:"name"`
+	Role         string     `json:"role"`         // admin or petugas
+	Username     string     `json:"username"`
+	PasswordHash string     `json:"-"`            // Never expose password hash
+	Token        string     `json:"token,omitempty"`
+	TokenExpiry  *time.Time `json:"token_expiry,omitempty"`
+	LastLogin    *time.Time `json:"last_login,omitempty"`
+	CreatedAt    time.Time  `json:"created_at"`
+	UpdatedAt    time.Time  `json:"updated_at"`
 	DeletedAt    *time.Time `json:"deleted_at,omitempty"`
 }
 
@@ -69,13 +69,13 @@ type LoginRequest struct {
 
 // LoginResponse represents successful login response
 type LoginResponse struct {
-	ID          string    `json:"id"`
-	Name        string    `json:"name"`
-	Role        string    `json:"role"`
-	Username    string    `json:"username"`
-	Token       string    `json:"token"`
-	TokenExpiry time.Time `json:"token_expiry"`
-	LastLogin   time.Time `json:"last_login"`
+	ID          string     `json:"id"`
+	Name        string     `json:"name"`
+	Role        string     `json:"role"`
+	Username    string     `json:"username"`
+	Token       string     `json:"token"`
+	TokenExpiry *time.Time `json:"token_expiry"`
+	LastLogin   *time.Time `json:"last_login"`
 }
 
 // GenericResponse represents standard API response
