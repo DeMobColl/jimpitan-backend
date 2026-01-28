@@ -2,8 +2,11 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -36,6 +39,9 @@ type CORSConfig struct {
 }
 
 func Load() *Config {
+	// Load .env file (ignore error if not found)
+	_ = godotenv.Load()
+
 	dbPort, _ := strconv.Atoi(getEnv("DB_PORT", "3306"))
 	serverPort, _ := strconv.Atoi(getEnv("PORT", "8080"))
 	jwtExpiry, _ := strconv.Atoi(getEnv("JWT_EXPIRY_HOURS", "168"))
@@ -68,6 +74,12 @@ func Load() *Config {
 		CORS: CORSConfig{
 			AllowedOrigins: corsOrigins,
 		},
+	}
+}
+
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using environment variables")
 	}
 }
 

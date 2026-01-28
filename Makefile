@@ -21,7 +21,7 @@ run: build
 
 dev:
 	@echo "Starting Jimpitan backend in dev mode..."
-	@command -v air >/dev/null 2>&1 || (echo "Installing air..." && go install github.com/cosmtrek/air@latest)
+	@command -v air >/dev/null 2>&1 || (echo "Installing air..." && go install github.com/air-verse/air@latest)
 	@air
 
 test:
